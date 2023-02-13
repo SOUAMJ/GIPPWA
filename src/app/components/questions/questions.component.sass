@@ -1,0 +1,19 @@
+$loading-size: 40px
+$animation-duration: 1s
+
+@keyframes loading
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+
+.loading-animation
+  display: inline-block
+  position: relative
+  width: $loading-size
+  height: $loading-size
+  margin: 20px auto
+  border: 4px solid #ccc
+  border-top-color: #333
+  border-radius: 50%
+  animation: loading $animation-duration linear infinite

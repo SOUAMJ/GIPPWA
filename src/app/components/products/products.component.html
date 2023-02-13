@@ -1,0 +1,6 @@
+<div class="row justify-content-center" *ngIf="data">
+    <div class="col-3 btn btn-primary m-3" *ngFor="let product of data[0].json.products" [routerLink]="['/products/']+product.name">
+        <a>
+            {{ product.name }}</a>
+    </div>
+  </div>
