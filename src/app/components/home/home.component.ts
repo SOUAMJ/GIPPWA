@@ -54,4 +54,7 @@ export class HomeComponent implements OnInit {
   onFormSelected(form: FormData) {
     this.form.setValue({...form}) 
   }
+  isConnected(){
+    console.log("test")
+  }
 }

@@ -17,4 +17,12 @@ export class AppComponent implements OnInit{
         this.data=data
       })
   }
+  isConnected(){
+    if(!localStorage.getItem('token') == null){
+      return true
+    }else{
+      return false
+    }
+  }
+  
 }

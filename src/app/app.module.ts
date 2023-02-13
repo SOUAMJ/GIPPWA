@@ -13,6 +13,7 @@ import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { ResultComponent } from './components/result/result.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { ClientHistoryComponent } from './components/client-history/client-history.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { ClientHistoryComponent } from './components/client-history/client-histo
     ResultComponent,
     ProgressBarComponent,
     ClientHistoryComponent,
+    LoginComponent,
   ],
   imports: [
     FormlyBootstrapModule,

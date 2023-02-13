@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SharedDataService } from './shareddata.service';
 @Injectable({
   providedIn: 'root'
@@ -14,13 +14,19 @@ export class DataService {
 
 
   getData(url: string) {
-    return this.http.get(`${this.baseUrl}/${url}`).subscribe(data => {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get(`${this.baseUrl}/${url}`,{headers}).subscribe(data => {
       this.sharedDataService.setData(data);
     });;
   }
 
   postData(url: string, payload: Object){
-    return this.http.post(`${this.baseUrl}/${url}`, payload).subscribe(data => {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.post(`${this.baseUrl}/${url}`, payload,{headers}).subscribe(data => {
       this.sharedDataService.setData(data);
     });
   }
