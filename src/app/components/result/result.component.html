@@ -1,1 +1,12 @@
-<p>result works!</p>
+<div   class="row mt-4">
+    <form [formGroup]="form">
+        <div #hiddenDiv class="hiddendiv">
+            <app-progress-bar *ngIf="weight !== undefined" [progress]="weight"></app-progress-bar>
+            <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+            
+        </div>
+    </form>
+    <div class="col-12 d-flex justify-content-end">
+        <div class="btn btn-success m-3" (click)="generatePdf()" >SAVE</div>
+    </div>
+</div>

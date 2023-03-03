@@ -3,6 +3,8 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { Router } from '@angular/router';
 import { ClientFormService } from 'src/app/client-form.service';
 import { ClientDataService } from 'src/app/client-data.service';
+import { DataService } from 'src/app/data.service';
+import { SharedDataService } from 'src/app/shareddata.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -15,13 +17,24 @@ export class HomeComponent implements OnInit {
     phoneNumber: new FormControl(''),
     vatNumber: new FormControl(''),});
   submitted = false;
+  data: any
 
   constructor(private router: Router,
     private formBuilder: FormBuilder,
     private clientFormService: ClientFormService,
-    private clientDataService: ClientDataService) { }
+    private clientDataService: ClientDataService,
+    private dataService: DataService,
+    private sharedDataService: SharedDataService) { }
 
   ngOnInit(): void {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      this.router.navigate(['/login']);
+    }
+    this.dataService.getData('questions')
+    this.sharedDataService.data$.subscribe(data=>{
+      this.data=data
+    })
     this.form = this.formBuilder.group( // Some validators for our client form data
       {
         firstName: ['', Validators.required],

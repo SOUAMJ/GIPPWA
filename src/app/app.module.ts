@@ -14,6 +14,7 @@ import { ResultComponent } from './components/result/result.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { ClientHistoryComponent } from './components/client-history/client-history.component';
 import { LoginComponent } from './components/login/login.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { LoginComponent } from './components/login/login.component';
     ProgressBarComponent,
     ClientHistoryComponent,
     LoginComponent,
+    NavbarComponent,
   ],
   imports: [
     FormlyBootstrapModule,

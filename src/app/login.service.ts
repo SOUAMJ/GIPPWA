@@ -1,21 +1,36 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { from, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { IndexedDBService } from './indexed-db.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  private serverUrl = 'http://localhost:4000';
+  private readonly baseUrl = 'http://localhost:4000';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private indexedDBService: IndexedDBService) {}
 
   login(password: string): Observable<{ token: string, username: string }> {
-    return from(this.http.post<{ token: string, username: string }>(`${this.serverUrl}/login`, { password }))
-      .pipe(map(response => {
-        localStorage.setItem('token', response.token);
+    return this.http.post<any>(`${this.baseUrl}/login`, { password }).pipe(
+      map(response => {
+        this.indexedDBService.setItem('token', response.token);
+        this.indexedDBService.setItem('username', response.username);
         return response;
-      }));
+      })
+    );
+  }
+
+  logout(): void {
+    this.indexedDBService.clear();
+  }
+
+  getToken(): Promise<string> {
+    return this.indexedDBService.getItem('token');
+  }
+
+  getUsername(): Promise<string> {
+    return this.indexedDBService.getItem('username');
   }
 }

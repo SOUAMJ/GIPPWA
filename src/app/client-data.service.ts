@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { IndexedDBService } from './indexed-db.service';
 
 @Injectable({
   providedIn: 'root'
@@ -6,16 +7,21 @@ import { Injectable } from '@angular/core';
 export class ClientDataService {
   clientData: { [key: string]: any } = {};
 
-  constructor() {
-    this.clientData = localStorage.getItem('clientData') ? JSON.parse(localStorage.getItem('clientData') || "") : {};
+  constructor(private indexedDBService: IndexedDBService) {
+    this.indexedDBService.getItem('clientData').then((data) => {
+      if (data) {
+        this.clientData = data;
+      }
+    });
   }
 
   updateClientData(property: string, value: any) {
     this.clientData[property] = value;
-    localStorage.setItem('clientData', JSON.stringify(this.clientData));
+    this.indexedDBService.setItem('clientData', this.clientData);
   }
+
   clearClientData() {
     this.clientData = {};
-    localStorage.removeItem('clientData');
+    this.indexedDBService.removeItem('clientData');
   }
 }

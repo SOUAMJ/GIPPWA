@@ -1,14 +1,24 @@
 <div class="row d-flex justify-content-between align-items-center">
-    <div class="col-12">
+    <div   class="col-12">
         <form [formGroup]="form" (ngSubmit)="onSubmit(model)">
-            <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
-            <button type="submit" id="submit" class="btn btn-success d-none">Submit</button>
+            <div #hiddenDiv id="hiddenDiv" class="hiddendiv">
+                <formly-form  [form]="form" [fields]="fields" [model]="model"></formly-form>
+            </div>
+            
+            <div class="row m-3">
+                <button type="submit" id="submit" class="btn btn-success d-none col-2">Submit</button>
+            </div>
         </form>
     </div>
+    
+    
     <div class="col-3">
         <div class="btn btn-primary d-none" id="previous" (click)='previous()'>← Previous</div>
     </div>
     <div class="col-3">
         <div class="btn btn-primary d-none" id="next" (click)='next()'>Next →</div>
+    </div>
+    <div class="col-12 text-center">
+        <div class="btn btn-primary d-none" id="result" (click)="result()" >See result</div>
     </div>
 </div>

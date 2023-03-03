@@ -32,7 +32,9 @@ export class ClientHistoryComponent implements OnInit {
   constructor(private clientFormService: ClientFormService) { }
 
   ngOnInit() {
-    this.forms = this.clientFormService.getLastThreeForms();
+    this.clientFormService.getLastThreeForms().then((forms) => {
+      this.forms = forms;
+    });
   }
 
   onFormClick(form: FormData) {

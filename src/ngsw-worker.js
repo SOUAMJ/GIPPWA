@@ -1,5 +1,3 @@
-// ngsw-worker.js
-
 const cacheName = 'v1';
 const cacheFiles = [
   '/index.html',
@@ -34,9 +32,18 @@ self.addEventListener('activate', function(e) {
 });
 
 self.addEventListener('fetch', function(event) {
+  const requestURL = new URL(event.request.url);
+  const isAPIRequest = requestURL.pathname.startsWith('/api');
+
+  if (isAPIRequest) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request).then(function(response) {
       if (response) {
+        console.log('[ServiceWorker] Returning response from cache:', event.request.url);
         return response;
       }
 
@@ -44,12 +51,14 @@ self.addEventListener('fetch', function(event) {
 
       return fetch(fetchRequest).then(function(response) {
         if (!response || response.status !== 200 || response.type !== 'basic') {
+          console.log('[ServiceWorker] Failed to fetch:', event.request.url);
           return response;
         }
 
         let responseToCache = response.clone();
 
-        caches.open('api-cache').then(function(cache) {
+        caches.open(cacheName).then(function(cache) {
+          console.log('[ServiceWorker] Caching response:', event.request.url);
           cache.put(event.request, responseToCache);
         });
 

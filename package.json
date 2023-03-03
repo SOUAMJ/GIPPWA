@@ -19,11 +19,15 @@
     "@angular/platform-browser-dynamic": "^15.1.0",
     "@angular/router": "^15.1.0",
     "@angular/service-worker": "^15.1.0",
+    "@ngx-formly/bootstrap": "^6.0.0",
+    "@ngx-formly/core": "^6.0.0",
+    "computed-style-to-inline-style": "^3.0.0",
+    "dom-to-image": "^2.6.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.12.0",
-    "@ngx-formly/core": "^6.0.0",
-    "@ngx-formly/bootstrap": "^6.0.0"
+    "zone.js": "~0.12.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^15.1.3",
